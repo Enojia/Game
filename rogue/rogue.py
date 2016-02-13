@@ -17,10 +17,10 @@ class Object:
         self.y += dy
     
     def draw(self):
-        libtcod.console_set_default_foreground(0, self.color)
-        libtcod.console_put_char(0, self.x, self.y,self.char ,libtcod.BKGND_NONE)
+        libtcod.console_set_default_foreground(con, self.color)
+        libtcod.console_put_char(con, self.x, self.y,self.char ,libtcod.BKGND_NONE)
     def clear(self):
-        libtcod.console_put_char(0, self.x, self.y,' ',libtcod.BKGND_NONE)
+        libtcod.console_put_char(con, self.x, self.y,' ',libtcod.BKGND_NONE)
 
 def handle_keys():
     global playerx, playery ##static variables
