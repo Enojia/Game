@@ -1,13 +1,13 @@
 import libtcodpy as libtcod
 
-def render_all(objects, map):
+def render_all(objects, dongeon, con):
     for obj in objects:
-        obj.draw()
+        obj.draw(con)
     
-    for y in range(map.MAP_HEIGHT):
-        for x in range(map.MAP_WIDTH):
-            wall = map.map[x][y].block_sight
+    for y in range(dongeon.map_height):
+        for x in range(dongeon.map_width):
+            wall = dongeon.map[x][y].block_sight
             if wall:
-                libtcod.console_set_char_background(con, x, y, map.color_dark_wall, libtcod.BKGND_SET)
+                libtcod.console_set_char_background(con, x, y, dongeon.color_dark_wall, libtcod.BKGND_SET)
             else:
-                libtcod.console_set_char_background(con, x, y, map.color_dark_ground, libtcod.BKGND_SET)
+                libtcod.console_set_char_background(con, x, y, dongeon.color_dark_ground, libtcod.BKGND_SET)

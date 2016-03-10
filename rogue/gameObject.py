@@ -1,39 +1,33 @@
 import libtcodpy as libtcod
 
-class Object:
-    def __init__(self, x, y, char, color):
+class Object(object):
+    def __init__(self, x, y, char, color, dongeon):
         self.x = x
         self.y = y
         self.char = char
-        self.color =color
+        self.color = color
+        self.dongeon = dongeon
 
     def move(self, dx, dy):
-        self.x += dx
-        self.y += dy
+        if not self.dongeon.map[self.x + dx][self.y + dy].blocked:
+            self.x += dx
+            self.y += dy
     
-    def draw(self):
+    def draw(self, con):
         libtcod.console_set_default_foreground(con, self.color)
         libtcod.console_put_char(con, self.x, self.y,self.char ,libtcod.BKGND_NONE)
-    def clear(self):
+    def clear(self,con):
         libtcod.console_put_char(con, self.x, self.y,' ',libtcod.BKGND_NONE)
 
 class Player(Object):
-    def handle_keys():
-        global playerx, playery ##static variables
-
-        key = libtcod.console_wait_for_keypress(True)
-
-        if key.vk == libtcod.KEY_ENTER and key.lalt:
-            libtcod.console_set_fullscreen(not libtcod.console_is_fullscreen())
-        elif key.vk == libtcod.KEY_ESCAPE:
-            return True ## exit function
-    
+    def handle_keys(self):
+        global playerx, playery ##static variables        
         ## character controler 
         if libtcod.console_is_key_pressed(libtcod.KEY_UP):
-            player.move(0,1)
+            self.move(0,-1)
         elif libtcod.console_is_key_pressed(libtcod.KEY_DOWN):
-            player.move(0,-1)
+            self.move(0,1)
         elif libtcod.console_is_key_pressed(libtcod.KEY_LEFT):
-            player.move(-1,0)
+            self.move(-1,0)
         elif libtcod.console_is_key_pressed(libtcod.KEY_RIGHT):
-            player.move(1,0)
+            self.move(1,0)
